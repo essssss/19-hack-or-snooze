@@ -88,7 +88,10 @@ function updateUIOnSubmit() {
 
 function addStorytoFavs(evt) {
    evt.preventDefault();
-
+   if (!currentUser) {
+      alert('Log in to use this feature');
+      return;
+   }
    //identify story ID
    if (evt.target.className === 'story-fav-button') {
       console.debug('addStoryToFavs');

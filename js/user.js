@@ -112,8 +112,7 @@ function updateUIOnUserLogin() {
 
    $loginForm.hide();
    $signupForm.hide();
-
    $allStoriesList.show();
-
+   console.log(storyFavButton);
    updateNavOnLogin();
 }

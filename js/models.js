@@ -212,11 +212,25 @@ class User {
       });
 
       let { story } = response.data;
+      // check if the story is already in favorites list:
       const i = currentUser.favorites.findIndex(
          (e) => e.storyId === favStoryId
       );
+      //if it is, remove it. if not, add it. Also, add it to list through API.
       if (i > -1) {
          currentUser.favorites.splice(i);
-      } else currentUser.favorites.push(story);
+         await axios({
+            url: `${BASE_URL}/users/${currentUser.username}/favorites/${favStoryId}`,
+            method: 'DELETE',
+            params: { token: currentUser.loginToken },
+         });
+      } else {
+         currentUser.favorites.push(story);
+         await axios({
+            url: `${BASE_URL}/users/${currentUser.username}/favorites/${favStoryId}`,
+            method: 'POST',
+            params: { token: currentUser.loginToken },
+         });
+      }
    }
 }

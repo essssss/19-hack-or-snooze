@@ -106,6 +106,15 @@ function saveUserCredentialsInLocalStorage() {
  * - update nav bar options for logged-in user
  * - generate the user profile part of the page
  */
+function displayFavsOnStoryList(storyId) {
+   const listItem = document.querySelector(`#${storyId}`);
+   listItem.classList.add('story-fav');
+   console.log(
+      (document.querySelector(
+         `#${storyId} > small.story-fav-button`
+      ).innerHTML = 'remove from favorites')
+   );
+}
 
 function updateUIOnUserLogin() {
    console.debug('updateUIOnUserLogin');
@@ -113,6 +122,10 @@ function updateUIOnUserLogin() {
    $loginForm.hide();
    $signupForm.hide();
    $allStoriesList.show();
-   console.log(storyFavButton);
    updateNavOnLogin();
+   for (let id of currentUser.favorites) {
+      let IdToFav = id.storyId;
+      console.log(IdToFav);
+      displayFavsOnStoryList(IdToFav);
+   }
 }

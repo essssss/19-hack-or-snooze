@@ -105,15 +105,15 @@ function saveUserCredentialsInLocalStorage() {
  * - show the stories list
  * - update nav bar options for logged-in user
  * - generate the user profile part of the page
+ * - highlight the User Favorites
  */
 function displayFavsOnStoryList(storyId) {
-   const listItem = document.querySelector(`#${storyId}`);
-   listItem.classList.add('story-fav');
-   console.log(
-      (document.querySelector(
-         `#${storyId} > small.story-fav-button`
-      ).innerHTML = 'remove from favorites')
-   );
+   console.log(storyId);
+   console.log(document.querySelector(`#${storyId}`));
+   document.querySelector(`#${storyId}`).classList.add('story-fav');
+
+   document.querySelector(`#${storyId} > small.story-fav-button`).innerHTML =
+      'remove from favorites';
 }
 
 function updateUIOnUserLogin() {
@@ -125,7 +125,6 @@ function updateUIOnUserLogin() {
    updateNavOnLogin();
    for (let id of currentUser.favorites) {
       let IdToFav = id.storyId;
-      console.log(IdToFav);
       displayFavsOnStoryList(IdToFav);
    }
 }

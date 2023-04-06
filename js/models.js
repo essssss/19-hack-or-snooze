@@ -212,6 +212,7 @@ class User {
       });
 
       let { story } = response.data;
+      let favStory = new Story(story);
       // check if the story is already in favorites list:
       const i = currentUser.favorites.findIndex(
          (e) => e.storyId === favStoryId
@@ -225,7 +226,7 @@ class User {
             params: { token: currentUser.loginToken },
          });
       } else {
-         currentUser.favorites.push(story);
+         currentUser.favorites.push(favStory);
          await axios({
             url: `${BASE_URL}/users/${currentUser.username}/favorites/${favStoryId}`,
             method: 'POST',
